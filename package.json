@@ -1,0 +1,31 @@
+{
+  "name": "ecomm",
+  "version": "1.0.0",
+  "private": "true",
+  "type": "module",
+  "description": "Just an mini-ecommerce app",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node --env-file=.env index",
+    "test": "node --test test/**/*.test.js",
+    "lint": "eslint .",
+    "format": "prettier . --write",
+    "prepare": "husky"
+  },
+  "keywords": [],
+  "author": "Wanderson M.",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.11.1",
+    "@types/node": "^22.6.1",
+    "eslint": "^9.11.1",
+    "globals": "^15.9.0",
+    "husky": "^9.1.6",
+    "lint-staged": "^15.2.10",
+    "prettier": "^3.3.3",
+    "supertest": "^7.0.0"
+  }
+}
