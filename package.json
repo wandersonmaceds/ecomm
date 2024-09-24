@@ -1,0 +1,22 @@
+{
+  "name": "ecomm",
+  "version": "1.0.0",
+  "private": "true",
+  "type": "module",
+  "description": "Just an mini-ecommerce app",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node --env-file=.env index",
+    "test": "node --test test/**/*.test.js"
+  },
+  "keywords": [],
+  "author": "Wanderson M.",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.6.1",
+    "supertest": "^7.0.0"
+  }
+}
