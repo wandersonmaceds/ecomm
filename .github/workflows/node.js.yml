@@ -11,6 +11,9 @@ on:
 
 jobs:
   test:
+    defaults: 
+      run:
+        working-directory: './api'
     runs-on: ubuntu-latest
 
     strategy:
@@ -18,16 +21,26 @@ jobs:
         node-version: [22.x]
 
     steps:
-      - uses: actions/checkout@v4
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 9
-      - uses: actions/checkout@v4
-      - name: Use Node.js ${{ matrix.node-version }}
+        # checkout project
+      - name: Checkout
+        uses: actions/checkout@v4
+
+        # setup node.js
+      - name: Setup Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "pnpm"
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm test
+        
+        # setup pnpm
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+          run_install: false
+      
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Test
+        run: pnpm test
+        
