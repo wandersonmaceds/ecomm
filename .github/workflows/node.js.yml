@@ -11,6 +11,9 @@ on:
 
 jobs:
   test:
+    defaults: 
+      run:
+        working-directory: './api'
     runs-on: ubuntu-latest
 
     strategy:
@@ -27,11 +30,9 @@ jobs:
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
-          working-directory: ./api
           node-version: ${{ matrix.node-version }}
           cache: "pnpm"
         
       - run: pnpm install --frozen-lockfile
-        working-directory: ./api
       - run: pnpm test
-        working-directory: ./api
+        
