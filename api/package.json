@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "node --env-file=.env index",
     "test": "node --test test/**/*.test.js",
+    "test:watch": "node --watch --test test/**/*.test.js",
     "lint": "eslint .",
     "format": "prettier . --write",
     "prepare": "husky"
@@ -16,11 +17,14 @@
   "author": "Wanderson M.",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.21.0"
+    "express": "^4.21.0",
+    "joi": "^17.13.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.11.1",
+    "@types/express": "^5.0.0",
     "@types/node": "^22.6.1",
+    "@types/supertest": "^6.0.2",
     "eslint": "^9.11.1",
     "globals": "^15.9.0",
     "husky": "^9.1.6",
