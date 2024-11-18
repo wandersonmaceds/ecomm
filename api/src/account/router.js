@@ -6,8 +6,8 @@ import { createAccount } from './create-account.js';
 
 const router = Router();
 
-router.post("/accounts", (request, response) => {
-  const { error, account } = createAccount(request.body, accountRepository);
+router.post("/accounts", async (request, response) => {
+  const { error, account } = await createAccount(request.body, accountRepository);
 
   if (error) {
     return response.status(HTTP_STATUSES.BAD_REQUEST).json(error);

@@ -6,7 +6,7 @@ const accountSchema = joi.object({
   password: joi.string().min(6).required(),
 });
 
-export const createAccount = (data, accountRepository) => {
+export const createAccount = async (data, accountRepository) => {
   const errorMap = {};
   const { error, value: account } = accountSchema.validate(data, {
     abortEarly: false,
@@ -18,7 +18,8 @@ export const createAccount = (data, accountRepository) => {
     });
   }
 
-  if(accountRepository.existsByLogin(account.login)) {
+  const loginAlreadyTaken = await accountRepository.existsByLogin(account.login);
+  if(loginAlreadyTaken) {
     errorMap.login = '"login" already used';
   }
 

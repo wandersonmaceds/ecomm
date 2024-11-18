@@ -1,11 +1,17 @@
-import { describe, it } from "node:test";
+import { describe, it, afterEach } from "node:test";
 
 import agent from "supertest";
 import assert from "node:assert";
 
 import app from "../../src/main.js";
+import db from "../../src/infra/database/connection.js";
 
 describe("Create Account", () => {
+  
+  afterEach( async () => {
+    await db.run('DELETE FROM accounts');
+  });
+
   it("should create an account with email and password", async () => {
     return agent(app)
       .post("/accounts")
