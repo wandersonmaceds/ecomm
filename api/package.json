@@ -12,7 +12,7 @@
     "lint": "eslint .",
     "format": "prettier . --write",
     "prepare": "husky",
-    "knex": "knex --esm  --debug --knexfile ./src/infra/database/connection.js"
+    "migrate": "node src/infra/database/migrate.js"
   },
   "keywords": [],
   "author": "Wanderson M.",
