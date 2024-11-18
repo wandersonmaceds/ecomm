@@ -52,6 +52,10 @@ describe("Create Account", () => {
       password: "passwd",
     };
 
+    const expected = {
+      login: '"login" already used',
+    };
+
     return agent(app)
       .post("/accounts")
       .send(account)
@@ -61,9 +65,6 @@ describe("Create Account", () => {
           .send(account)
           .expect(400)
           .then((response) => {
-            const expected = {
-              login: '"login" already used',
-            };
             assert.deepEqual(response.body, expected);
           });
       });
