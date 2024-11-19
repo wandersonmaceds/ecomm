@@ -1,5 +1,6 @@
 import joi from "joi";
 import slugify from "slugify";
+import { validate } from "../../lib/validator.js";
 
 const categorySchema = joi.object({
   name: joi.string().trim().required(),
@@ -7,35 +8,32 @@ const categorySchema = joi.object({
 });
 
 export const createCategory = async (data, categoryRepository) => {
-  const errorMap = {};
-  const { error, value: categoryData } = categorySchema.validate(data, {
-    abortEarly: false,
-  });
+  const {
+    isValid,
+    errors,
+    value: category,
+  } = await validate(
+    categorySchema,
+    data,
+    [
+      {
+        validate: async (value) => {
+          return categoryRepository.existsBySlug(slugify(value.name));
+        },
+        name: "name",
+        message: '"Name" already used',
+      },
+    ],
+    (value) => ({ ...value, slug: slugify(value.name) }),
+  );
 
-  if (error) {
-    error.details.forEach((err) => {
-      errorMap[err.path] = err.message;
-    });
-  }
-
-  const slug = slugify(categoryData.name, { lower: true });
-
-  const existsBySlug = await categoryRepository.existsBySlug(slug);
-  if (existsBySlug) {
-    errorMap.name = '"Name" already used';
-  }
-
-  const category = { ...categoryData, slug };
-
-  const hasErrors = Object.keys(errorMap).length > 0;
-
-  if (!hasErrors) {
+  if (isValid) {
     const categoryWithID = await categoryRepository.save(category);
     category.id = categoryWithID.id;
   }
 
   return {
-    error: hasErrors ? errorMap : null,
+    error: !isValid ? errors : null,
     category: category,
   };
 };
