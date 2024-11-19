@@ -11,26 +11,32 @@ export const createAccount = async (data, accountRepository) => {
   const { error, value: account } = accountSchema.validate(data, {
     abortEarly: false,
   });
-  
+
   if (error) {
     error.details.forEach((err) => {
       errorMap[err.path] = err.message;
     });
   }
 
-  const loginAlreadyTaken = await accountRepository.existsByLogin(account.login);
-  if(loginAlreadyTaken) {
+  const loginAlreadyTaken = await accountRepository.existsByLogin(
+    account.login,
+  );
+  if (loginAlreadyTaken) {
     errorMap.login = '"login" already used';
   }
 
   const hasErrors = Object.keys(errorMap).length > 0;
 
-  if(!hasErrors) {
-    accountRepository.save(account)
+  if (!hasErrors) {
+    accountRepository.save(account);
   }
 
   return {
     error: hasErrors ? errorMap : null,
-    account: { ...account,  createdAt: new Date().toUTCString(), id: randomUUID() }
-  }
-}
+    account: {
+      ...account,
+      createdAt: new Date().toUTCString(),
+      id: randomUUID(),
+    },
+  };
+};

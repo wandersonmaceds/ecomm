@@ -1,8 +1,8 @@
-import sqlite from 'sqlite3';
-import { open } from 'sqlite';
+import sqlite from "sqlite3";
+import { open } from "sqlite";
 
 const db = await open({
-  filename: 'data.db',
+  filename: "data.db",
   driver: sqlite.Database,
 });
 
