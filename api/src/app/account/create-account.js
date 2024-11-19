@@ -1,5 +1,4 @@
 import joi from "joi";
-import { randomUUID } from "crypto";
 import { validate } from "../../lib/validator.js";
 
 const accountSchema = joi.object({
