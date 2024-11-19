@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { HTTP_STATUSES } from "../lib/http.js";
+import { HTTP_STATUSES } from "../../lib/http.js";
 import { accountRepository } from "./account.repository.js";
 import { createAccount } from "./create-account.js";
 
