@@ -1,7 +1,7 @@
 import express from "express";
 
-import accountsRouter from "./account/router.js";
-import categoriesRouter from "./category/router.js";
+import accountsRouter from "./app/account/router.js";
+import categoriesRouter from "./app/category/router.js";
 
 const app = express();
 

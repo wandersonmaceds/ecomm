@@ -1,5 +1,5 @@
 /** TODO: we shouldn't import the connection like this, we need to use DIP here */
-import db from "../infra/database/connection.js";
+import db from "../../infra/database/connection.js";
 
 const save = async (category) => {
   const result = await db.run(
