@@ -7,9 +7,8 @@ import app from "../../src/main.js";
 import db from "../../src/infra/database/connection.js";
 
 describe("Create Account", () => {
-  
-  afterEach( async () => {
-    await db.run('DELETE FROM accounts');
+  afterEach(async () => {
+    await db.run("DELETE FROM accounts");
   });
 
   it("should create an account with email and password", async () => {
