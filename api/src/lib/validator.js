@@ -1,5 +1,9 @@
-
-export const validate = async (schema, data, asyncValidations = [], transform = (value) => value) => {
+export const validate = async (
+  schema,
+  data,
+  asyncValidations = [],
+  transform = (value) => value,
+) => {
   const errors = {};
   const { error, value } = schema.validate(data, { abortEarly: false });
 
@@ -8,22 +12,22 @@ export const validate = async (schema, data, asyncValidations = [], transform = 
       errors[err.path] = err.message;
     });
   }
-  
-  if(!error) {
+
+  if (!error) {
     for await (const validation of asyncValidations) {
       /** if returns false, is invalid */
       const isInvalid = await validation.validate(value);
-      if(isInvalid) {
+      if (isInvalid) {
         errors[validation.name] = validation.message;
       }
     }
   }
-  
+
   const isValid = Object.keys(errors).length === 0;
-  
+
   return {
     isValid,
     errors,
     value: transform(value),
-  }
-}
+  };
+};
