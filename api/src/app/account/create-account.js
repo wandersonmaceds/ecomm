@@ -1,5 +1,4 @@
 import joi from "joi";
-import { randomUUID } from "crypto";
 import { validate } from "../../lib/validator.js";
 
 const accountSchema = joi.object({
@@ -8,6 +7,10 @@ const accountSchema = joi.object({
 });
 
 export const createAccount = async (data, accountRepository) => {
+  /**
+   * TODO: encrypt password before saving it. we can use validate transformations.
+   */
+  
   const {
     isValid,
     errors,
