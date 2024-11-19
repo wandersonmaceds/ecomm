@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { createCategory } from "./create-category.js";
 import { categoryRepository } from "./category.repository.js";
-import { HTTP_STATUSES } from "../lib/http.js";
+import { HTTP_STATUSES } from "../../lib/http.js";
 
 const router = Router();
 
