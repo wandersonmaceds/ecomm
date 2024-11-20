@@ -24,10 +24,11 @@ export const validate = async (
   }
 
   const isValid = Object.keys(errors).length === 0;
+  const transformedValue = isValid ? transform(value) : value;
 
   return {
     isValid,
     errors,
-    value: transform(value),
+    value: transformedValue,
   };
 };
