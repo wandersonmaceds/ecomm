@@ -1,5 +1,6 @@
 import joi from "joi";
 import { validate } from "../../lib/validator.js";
+import { hashPassword } from "../../lib/password.js";
 
 const accountSchema = joi.object({
   login: joi.string().email().required(),
@@ -7,21 +8,22 @@ const accountSchema = joi.object({
 });
 
 export const createAccount = async (data, accountRepository) => {
-  /**
-   * TODO: encrypt password before saving it. we can use validate transformations.
-   */
-  
   const {
     isValid,
     errors,
     value: account,
-  } = await validate(accountSchema, data, [
-    {
-      validate: async (value) => accountRepository.existsByLogin(value.login),
-      name: "login",
-      message: '"login" already used',
-    },
-  ]);
+  } = await validate(
+    accountSchema,
+    data,
+    [
+      {
+        validate: async (value) => accountRepository.existsByLogin(value.login),
+        name: "login",
+        message: '"login" already used',
+      },
+    ],
+    (value) => ({ ...value, password: hashPassword(value.password) }),
+  );
 
   if (isValid) {
     accountRepository.save(account);
