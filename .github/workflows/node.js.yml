@@ -24,6 +24,12 @@ jobs:
         # checkout project
       - name: Checkout
         uses: actions/checkout@v4
+        
+      - name: Setup envs 
+        uses: aarcangeli/load-dotenv@v1
+        with:
+          path: 'api'
+          filenames: '.env.ci'
 
         # setup node.js
       - name: Setup Node.js ${{ matrix.node-version }}
