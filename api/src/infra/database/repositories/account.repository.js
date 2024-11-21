@@ -16,5 +16,5 @@ export const getAccountRepository = (connection) => ({
   findByID: async (id) => {
     const checkAccountQuery = "SELECT * FROM accounts WHERE id = ?";
     return connection.get(checkAccountQuery, [id]);
-  }
+  },
 });

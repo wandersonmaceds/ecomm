@@ -7,8 +7,10 @@
   "main": "index.js",
   "scripts": {
     "dev": "node --watch --env-file=.env index",
-    "test": "node --test",
-    "test:watch": "node --watch --test",
+    "test": "node --test --env-file=.env **/*.test.js",
+    "test:e2e": "node --test --test-concurrency=1 --env-file=.env **/*.test.e2e.js",
+    "test:watch": "node --watch --test --env-file=.env",
+    "test:debug": "node --inspect --test --env-file=.env",
     "lint": "eslint .",
     "format": "prettier . --write",
     "prepare": "husky",
@@ -20,6 +22,7 @@
   "dependencies": {
     "bcrypt": "^5.1.1",
     "express": "^4.21.0",
+    "express-async-errors": "^3.1.1",
     "joi": "^17.13.3",
     "jsonwebtoken": "^9.0.2",
     "passport": "^0.7.0",

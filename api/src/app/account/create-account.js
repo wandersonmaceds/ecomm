@@ -1,6 +1,6 @@
 import { validate } from "../../lib/validator.js";
 import { hashPassword } from "../../lib/password.js";
-import {accountSchema} from "./account.schema.js";
+import { accountSchema } from "./account.schema.js";
 
 export const createAccount = async (data, accountRepository) => {
   const {
