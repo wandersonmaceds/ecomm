@@ -54,5 +54,5 @@ jobs:
         run: pnpm test:ci
       
       - name: E2E Test
-        run: pnpm test:ci
+        run: pnpm test:ci:e2e
         
