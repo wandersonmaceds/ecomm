@@ -6,9 +6,11 @@
   "description": "Just an mini-ecommerce app",
   "main": "index.js",
   "scripts": {
-    "dev": "node --env-file=.env index",
-    "test": "node --test test/**/**/*.test.js",
-    "test:watch": "node --watch --test test/**/**/*.test.js",
+    "dev": "node --watch --env-file=.env index",
+    "test": "node --test --env-file=.env test/**/*.test.js",
+    "test:e2e": "node --test --test-concurrency=1 --env-file=.env test/**/*.test.e2e.js",
+    "test:ci": "node --test test/**/*.test.js",
+    "test:ci:e2e": "node --test --test-concurrency=1 test/**/*.test.e2e.js",
     "lint": "eslint .",
     "format": "prettier . --write",
     "prepare": "husky",
@@ -20,7 +22,11 @@
   "dependencies": {
     "bcrypt": "^5.1.1",
     "express": "^4.21.0",
+    "express-async-errors": "^3.1.1",
     "joi": "^17.13.3",
+    "jsonwebtoken": "^9.0.2",
+    "passport": "^0.7.0",
+    "passport-jwt": "^4.0.1",
     "slugify": "^1.6.6",
     "sqlite": "^5.1.1",
     "sqlite3": "^5.1.7"

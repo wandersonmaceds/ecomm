@@ -1,17 +1,13 @@
-import { describe, it, beforeEach, after } from "node:test";
+import { describe, it, afterEach } from "node:test";
 
 import agent from "supertest";
 import assert from "node:assert";
 
-import app from "../../../src/main.js";
-import db from "../../../src/infra/database/connection.js";
+import app from "../../../../src/main.js";
+import db from "../../../../src/infra/database/connection.js";
 
 describe("Create Account", () => {
-  beforeEach(async () => {
-    await db.run("DELETE FROM accounts");
-  });
-
-  after(async () => {
+  afterEach(async () => {
     await db.run("DELETE FROM accounts");
   });
 

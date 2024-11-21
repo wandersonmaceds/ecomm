@@ -18,12 +18,18 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [22.x]
+        node-version: [23.x]
 
     steps:
         # checkout project
       - name: Checkout
         uses: actions/checkout@v4
+        
+      - name: Setup envs 
+        uses: aarcangeli/load-dotenv@v1
+        with:
+          path: 'api'
+          filenames: '.env.ci'
 
         # setup node.js
       - name: Setup Node.js ${{ matrix.node-version }}
@@ -44,6 +50,9 @@ jobs:
       - name: Migrate database
         run: pnpm migrate
 
-      - name: Test
-        run: pnpm test
+      - name: Unit Test
+        run: pnpm test:ci
+      
+      - name: E2E Test
+        run: pnpm test:ci:e2e
         

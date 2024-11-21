@@ -1,11 +1,6 @@
-import joi from "joi";
 import { validate } from "../../lib/validator.js";
 import { hashPassword } from "../../lib/password.js";
-
-const accountSchema = joi.object({
-  login: joi.string().email().required(),
-  password: joi.string().min(6).required(),
-});
+import { accountSchema } from "./account.schema.js";
 
 export const createAccount = async (data, accountRepository) => {
   const {
