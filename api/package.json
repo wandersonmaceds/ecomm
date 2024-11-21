@@ -7,10 +7,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "node --watch --env-file=.env index",
-    "test": "node --test --env-file=.env **/*.test.js",
-    "test:e2e": "node --test --test-concurrency=1 --env-file=.env **/*.test.e2e.js",
-    "test:watch": "node --watch --test --env-file=.env",
-    "test:debug": "node --inspect --test --env-file=.env",
+    "test": "node --test --env-file=.env test/**/*.test.js",
+    "test:e2e": "node --test --test-concurrency=1 --env-file=.env test/**/*.test.e2e.js",
     "lint": "eslint .",
     "format": "prettier . --write",
     "prepare": "husky",
