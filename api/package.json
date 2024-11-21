@@ -9,6 +9,8 @@
     "dev": "node --watch --env-file=.env index",
     "test": "node --test --env-file=.env test/**/*.test.js",
     "test:e2e": "node --test --test-concurrency=1 --env-file=.env test/**/*.test.e2e.js",
+    "test:ci": "node --test test/**/*.test.js",
+    "test:ci:e2e": "node --test --test-concurrency=1 test/**/*.test.e2e.js",
     "lint": "eslint .",
     "format": "prettier . --write",
     "prepare": "husky",

@@ -50,6 +50,9 @@ jobs:
       - name: Migrate database
         run: pnpm migrate
 
-      - name: Test
-        run: pnpm test
+      - name: Unit Test
+        run: pnpm test:ci
+      
+      - name: E2E Test
+        run: pnpm test:ci
         
